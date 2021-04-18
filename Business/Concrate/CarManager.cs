@@ -39,7 +39,7 @@ namespace Business.Concrate
            _carDal.Add(car);
             return new SuccessResult(Messages.AddingSuccessful);
         }
-
+        [SecuredOperation("admin,cars.add")]
         [TransactionScopeAspect]
         public IResult AddTransactionalTest(Car car)
         {
@@ -52,6 +52,7 @@ namespace Business.Concrate
             return null;
         }
         [PerformanceAspect(5)]
+        [SecuredOperation("admin,cars.add")]
         public IResult Delete(Car car)
         {
             
@@ -104,7 +105,7 @@ namespace Business.Concrate
         {
             return  new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ColorId == id));
         }
-
+        [SecuredOperation("admin,cars.add")]
         public IResult Update(Car car)
         {
             _carDal.Update(car);
